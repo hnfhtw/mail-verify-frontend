@@ -3,7 +3,7 @@ $(function() {
         e.preventDefault(); // disable the default form submit even
 
         $.ajax({          
-            url: "http://" + $('script[src*=auth]').attr('data-backend') +"/login",
+            url: "https://" + $('script[src*=auth]').attr('data-backend') +"/login",
             type: "POST",
             data: {
                 usermail: $('#email').val()
