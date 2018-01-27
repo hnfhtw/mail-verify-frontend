@@ -15,7 +15,7 @@ $(function() {
         $('#verifyBtn').html('Loading...');
 
         $.ajax({
-            url: "https://" + $('script[src*=auth]').attr('data-backend') +"/verify",
+            url: "http://" + $('script[src*=auth]').attr('data-backend') +"/verify",
             type: "POST",
             data: {
                 mailad: $('#mailAddr').val(),
