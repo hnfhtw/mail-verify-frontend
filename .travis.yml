@@ -1,0 +1,30 @@
+jobs:
+  include:
+    - stage: deploy to staging
+      script: skip
+      deploy: &heroku
+        provider: heroku
+        app: hnfhtw-frontend-staging
+        api_key: $HEROKU_API_KEY
+    - stage: automatic user acceptance tests on staging
+      script:
+        - cd ..
+        - "git clone https://github.com/hnfhtw/mail-verify-tests.git"
+        - cd mail-verify-tests
+        - mvn verify
+        - cd ..
+        - "git clone https://github.com/hnfhtw/mail-verify-docs.git"
+        - rm -rf mail-verify-docs/generated/cukedoctor mail-verify-docs/generated/walk_through.mp4
+        - cp -r mail-verify-tests/target/cukedoctor mail-verify-docs/generated/
+        - cd mail-verify-docs/generated
+        - ../../mail-verify-tests/scripts/get_testingbot_video.py
+        - git add --all
+        - git commit -am "update documentation"
+        - git push "https://${TRAVIS_GITHUB_TOKEN}@github.com/hnfhtw/mail-verify-docs.git" master
+    - stage: deploy to production
+      script: skip
+      deploy:
+        <<: *heroku
+        app: hnfhtw-frontend
+    - stage: check production availability
+      script: 'curl https://hnfhtw-frontend.herokuapp.com/'
