@@ -21,7 +21,7 @@ $(document).ready(function () {
                   resultClass = 'fa fa-square-o';
                 }
                 
-                $('#historyTable tbody').append('<tr><td><i class="fa ' + resultClass + ' fa-2x" aria-hidden="true"></i></td><td style="text-align: center;">' + data.mailAd + '</td><td style="text-align: center;">' + data.result.result + '</td><td>' + FormatDate(EpochToDate(data.requestDate)) + '</td></tr>');
+                $('#historyTable tbody').append('<tr><td><i class="fa ' + resultClass + ' fa-2x" aria-hidden="true"></i></td><td style="text-align: center;">' + data.mailad + '</td><td style="text-align: center;">' + data.result.result + '</td><td>' + FormatDate(EpochToDate(data.requestdate)) + '</td></tr>');
             });
         },
         error: function (response) {
